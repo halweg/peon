@@ -1,0 +1,14 @@
+{
+    "name": "root/design",
+    "autoload": {
+        "psr-4": {
+            "Root\\Design\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "halweg"
+        }
+    ],
+    "require": {}
+}
