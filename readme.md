@@ -1,0 +1,1 @@
+A kind of Framework-less Object-oriented style Social project
