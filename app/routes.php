@@ -24,7 +24,7 @@ return function(Router $router) {
     );
 
     $router->errorHandler(
-        404, fn() => 'whoops!'
+        404, fn() => 'page not found!'
     );
 
     $router->add(
