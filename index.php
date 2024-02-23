@@ -43,6 +43,7 @@ $paths = array_merge(
 function abort($code): void
 {
     global $routes;
+    header('HTTP/1.1 500 Internal Server Error');
     $routes[$code]();
 }
 set_error_handler(function() {
