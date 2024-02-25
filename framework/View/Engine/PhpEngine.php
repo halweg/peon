@@ -15,4 +15,9 @@ class PhpEngine implements Engine
         ob_end_clean();
         return $contents;
     }
+
+    protected function escape(string $content): string
+    {
+        return htmlspecialchars($content, ENT_QUOTES);
+    }
 }
