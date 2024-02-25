@@ -19,6 +19,7 @@
     "require": {
         "filp/whoops": "^2.15",
         "vlucas/phpdotenv": "^5.6",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "symfony/console": "^6.4"
     }
 }

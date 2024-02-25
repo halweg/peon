@@ -28,4 +28,10 @@ class MysqlConnection extends Connection
     {
         return new MysqlQueryBuilder($this);
     }
+
+    public function createTable(string $table): MysqlConnection
+    {
+
+    }
+
 }

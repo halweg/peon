@@ -15,4 +15,6 @@ abstract class Connection
      * 在此连接上开始新的查询
      */
     abstract public function query(): QueryBuilder;
+
+    abstract public function createTable(string $table): Migration;
 }
