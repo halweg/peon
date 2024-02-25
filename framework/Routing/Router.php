@@ -3,6 +3,7 @@
 namespace Framework\Routing;
 
 use Exception;
+use Framework\Validation\ValidationException;
 use Throwable;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
@@ -20,7 +21,8 @@ class Router
     protected array $errorHandlers = [];
     protected Route $current;
 
-    public function add(string $method, string $path, callable $handler): Route
+
+    public function add(string $method, string $path, $handler): Route
     {
         return $this->routes[] = new Route($method, $path, $handler);
     }
@@ -43,11 +45,14 @@ class Router
             $this->current = $matching;
             try {
                 return $matching->dispatch();
-            }
-            catch (Throwable $e) {
+            } catch (Throwable $e) {
+                if ($e instanceof ValidationException) {
+                    $_SESSION['errors'] = $e->getErrors();
+                    return redirect($_SERVER['HTTP_REFERER']);
+                }
                 if (isset($_ENV['APP_ENV']) && $_ENV['APP_ENV'] === 'dev') {
                     $whoops = new Run();
-                    $whoops->pushHandler(new PrettyPageHandler());
+                    $whoops->pushHandler(new PrettyPageHandler);
                     $whoops->register();
                     throw $e;
                 }

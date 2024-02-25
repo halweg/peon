@@ -51,7 +51,7 @@ class AdvancedEngine implements Engine
         // 用 `$this->extends` 替换 `@extends`
         $template = preg_replace_callback('#@extends\(([^)]+)\)#',
             function($matches) {
-                return ' <?php $this ->extends(' . $matches[1] . '); ?>';
+                return ' <?php $this->extends(' . $matches[1] . '); ?>';
             }, $template);
 
         $template = preg_replace_callback('#@if\(([^)]+)\)#',
@@ -63,12 +63,17 @@ class AdvancedEngine implements Engine
             return ' <?php endif ; ?>';
         }, $template);
 
-        $template = preg_replace_callback('#\{\{([^}]+)\}\}#', function($matches) {
-            return ' <?php print $this->escape(' . $matches[1] . '); ?>';
+        $template = preg_replace_callback('#@foreach\(([^)]+)\)#', function($matches) {
+            return ' <?php foreach(' . $matches[1] . '): ?>';
+        }, $template);
+
+        // 用 `endforeach` 替换 `@endforeach`
+        $template = preg_replace_callback('#@endforeach#', function($matches) {
+            return ' <?php endforeach; ?>';
         }, $template);
 
         // 用 `print ...` 替换 `{!! ... !!}`
-        $template = preg_replace_callback('#\{!!([^}]+)!!\}#',
+        $template = preg_replace_callback('#\{\{([^}]+)\}\}#',
             function($matches) {
                 return ' <?php print ' . $matches[1] . '; ?>';
             }, $template);

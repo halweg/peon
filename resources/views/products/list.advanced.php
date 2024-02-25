@@ -3,6 +3,6 @@
 <p>显示所有产品...</p>
 
 @if($next)
-<a href="{!! $next !!}">下一个</a>
+<a href="{{ $next }}">下一个</a>
 @endif
 
