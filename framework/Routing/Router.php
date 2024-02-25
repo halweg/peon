@@ -3,6 +3,9 @@
 namespace Framework\Routing;
 
 use Exception;
+use Throwable;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class Router
 {
@@ -27,24 +30,31 @@ class Router
         $this->errorHandlers[$code] = $handler;
     }
 
+    /**
+     * @throws Throwable
+     */
     public function dispatch()
     {
         $paths = $this->paths();
-
         $requestMethod = $_SERVER['REQUEST_METHOD'] ?? 'GET';
         $requestPath = $_SERVER['REQUEST_URI'] ?? '/';
-
         $matching = $this->match($requestMethod, $requestPath);
         if ($matching) {
             $this->current = $matching;
-
-            return $matching->dispatch();
+            try {
+                return $matching->dispatch();
+            }
+            catch (Throwable $e) {
+                $whoops = new Run();
+                $whoops->pushHandler(new PrettyPageHandler());
+                $whoops->register();
+                throw $e;
+                return $this->dispatchError();
+            }
         }
-
         if (in_array($requestPath, $paths)) {
             return $this->dispatchNotAllowed();
         }
-
         return $this->dispatchNotFound();
     }
 
