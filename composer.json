@@ -16,5 +16,7 @@
     "config": {
         "process-timeout": 0
     },
-    "require": {}
+    "require": {
+        "filp/whoops": "^2.15"
+    }
 }
