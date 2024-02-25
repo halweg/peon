@@ -48,7 +48,9 @@ return function(Router $router) {
                 'product-list', ['page' => $parameters['page'] + 1]
             );
 
-            return "products for page {$parameters['page']}, next page is {$next}";
+            return view('products/list', [
+                'next' => $next,
+            ]);
         },
     )->name('product-list');
 

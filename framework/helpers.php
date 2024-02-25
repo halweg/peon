@@ -11,16 +11,17 @@ if (!function_exists('view')) {
         static $manager;
         if (!$manager) {
             $manager = new View\Manager();
-            // 为视图文件夹添加一个路径
-            // 这样管理器就知道在哪里查找视图
             $manager->addPath(__DIR__ . '/../resources/views');
-            // 还将开始添加新的引擎类
-            // 以及它们预期的扩展名，以便能够选适合模板的合适引擎
+
             $manager->addEngine('basic.php', new View\Engine\BasicEngine());
+            $manager->addEngine('advanced.php', new View\Engine\AdvancedEngine());
             $manager->addEngine('php', new View\Engine\PhpEngine());
-            $manager->addMacro('escape',
-                fn($value) => htmlspecialchars($value)
-            );
+
+            // 宏怎么样？ 现在让我们在这里添加它们
+            $manager->addMacro('escape', fn($value) =>
+            htmlspecialchars($value));
+            $manager->addMacro('includes', fn(...$params) => print
+                view(...$params));
         }
         return $manager->resolve($template, $data);
     }

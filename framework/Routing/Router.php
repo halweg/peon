@@ -3,7 +3,6 @@
 namespace Framework\Routing;
 
 use Exception;
-use Throwable;
 
 class Router
 {
