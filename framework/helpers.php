@@ -2,6 +2,7 @@
 use Framework\View;
 
 if (!function_exists('view')) {
+
     /**
      * @throws Exception
      */
@@ -17,7 +18,10 @@ if (!function_exists('view')) {
             // 以及它们预期的扩展名，以便能够选适合模板的合适引擎
             $manager->addEngine('basic.php', new View\Engine\BasicEngine());
             $manager->addEngine('php', new View\Engine\PhpEngine());
+            $manager->addMacro('escape',
+                fn($value) => htmlspecialchars($value)
+            );
         }
-        return $manager->render($template, $data);
+        return $manager->resolve($template, $data);
     }
 }
