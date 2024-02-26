@@ -2,7 +2,8 @@
 
 namespace Framework\Database\Exception;
 
-class MigrationException extends \Exception
-{
+use PDOException;
 
+class MigrationException extends PDOException
+{
 }

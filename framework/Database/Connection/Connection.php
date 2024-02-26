@@ -2,6 +2,7 @@
 
 namespace Framework\Database\Connection;
 
+use Framework\Database\Migration\Migration;
 use Framework\Database\QueryBuilder\QueryBuilder;
 use Pdo;
 abstract class Connection
@@ -17,4 +18,6 @@ abstract class Connection
     abstract public function query(): QueryBuilder;
 
     abstract public function createTable(string $table): Migration;
+
+    abstract public function alterTable(string $table): Migration;
 }

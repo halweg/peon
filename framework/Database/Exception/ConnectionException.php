@@ -2,7 +2,8 @@
 
 namespace Framework\Database\Exception;
 
-class ConnectionException extends \Exception
-{
+use PDOException;
 
+class ConnectionException extends PDOException
+{
 }

@@ -2,7 +2,8 @@
 
 namespace Framework\Database\Exception;
 
-class QueryException extends \Exception
-{
+use PDOException;
 
+class QueryException extends PDOException
+{
 }

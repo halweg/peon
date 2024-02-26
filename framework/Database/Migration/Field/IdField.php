@@ -3,6 +3,7 @@
 namespace Framework\Database\Migration\Field;
 
 use Framework\Database\Exception\MigrationException;
+
 class IdField extends Field
 {
     public function default()
