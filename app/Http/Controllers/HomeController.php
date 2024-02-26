@@ -17,18 +17,12 @@ class HomeController
         $factory->addConnector('mysql', function($config) {
             return new MysqlConnection($config);
         });
-        $connection = $factory->connect([
-            'type' => 'mysql',
-            'host' => '127.0.0.1',
-            'port' => '3306',
-            'database' => 'demo',
-            'username' => 'root',
-            'password' => '123456',
-        ]);
+        $config = require __DIR__ . '/../../../config/database.php';
+        $connection = $factory->connect($config[$config['default']]);
         $product = $connection
             ->query()
             ->select()
-            ->from('demo')
+            ->from('orders')
             ->first();
         var_dump($product);
         return view('home', [
