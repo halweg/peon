@@ -20,4 +20,10 @@ abstract class Connection
     abstract public function createTable(string $table): Migration;
 
     abstract public function alterTable(string $table): Migration;
+
+    abstract public function getTables(): array;
+
+    abstract public function hasTable(string $name): bool;
+
+    abstract public function dropTables(): int;
 }
