@@ -1,1 +1,1 @@
-a simple framewokr for php
+a simple framework for php
